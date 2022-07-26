@@ -40,3 +40,24 @@ ON experiences."companyId" = companies.id
 JOIN roles
 ON experiences."roleId" = roles.id
 WHERE experiences."userId" = 50 AND experiences."endDate" IS NULL
+
+--Questão bônus
+
+SELECT schools.id, schools.name as school, courses.name as course, companies.name as company, roles.name as role
+FROM applicants
+JOIN jobs
+ON applicants."jobId" = jobs.id
+JOIN companies
+ON jobs."companyId" = companies.id
+JOIN roles
+ON jobs."roleId" = roles.id
+JOIN users
+ON applicants."userId" = users.id
+JOIN educations
+ON users.id = educations."userId"
+JOIN schools
+ON educations."schoolId" = schools.id
+JOIN courses
+ON educations."courseId" = courses.id
+WHERE roles.name = 'Software Engineer' AND jobs."companyId" = 10 AND jobs.active = 'true'
+ORDER BY id ASC
